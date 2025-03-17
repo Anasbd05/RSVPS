@@ -1,12 +1,9 @@
-import Hero from "@/components/Hero";
-import Navbar from "@/components/Navbar";
+import RSVPform from "./_components/RSVPform";
 
 export default function Home() {
   return (
     <div>
-      <Navbar />
-      <Hero />
-
+      <RSVPform />
     </div>
   );
 }

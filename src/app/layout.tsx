@@ -1,8 +1,8 @@
 import type {Metadata} from "next";
-import {Outfit} from "next/font/google";
+import {Roboto} from "next/font/google";
 import "./globals.css";
 
-const outfit = Outfit({
+const roboto = Roboto({
   subsets: ["latin"],
 });
 
@@ -18,8 +18,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body cz-shortcut-listen="true"
-        className={`${outfit.className} py-3 bg-[#222831] text-[#EEEEEE]  antialiased`}
+      <body cz-shortcut-listen="true" suppressHydrationWarning
+        className={`${roboto.className}  antialiased`}
       >
         {children}
       </body>
