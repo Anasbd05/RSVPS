@@ -49,6 +49,10 @@ const RSVPform = () => {
         } else {
             toast.error(response.message)
         }
+        if(response.error?.code === "23505") {
+            toast.error("Email already exists!")
+            setErrors({email: "Email already exists!"})
+        }
         setIsLoading(false)
     }
     const openGoogleMaps = () => {

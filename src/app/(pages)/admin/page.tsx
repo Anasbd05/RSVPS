@@ -7,10 +7,7 @@ import RsvpTable from '@/app/_components/RsvpTable'
 
 const page = async () => {
 
-    const {success,data,message} = await getRsvps()
-
-
-
+    const {data} = await getRsvps()
     return (
         <div className='container mx-auto mt-8 p-4'>
             <div className="flex justify-between items-center mb-6">
