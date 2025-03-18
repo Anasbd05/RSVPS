@@ -7,6 +7,8 @@ import {RadioGroup,RadioGroupItem} from '@/components/ui/radio-group'
 import {MapPin} from 'lucide-react'
 import React,{useState} from 'react'
 import {strings} from '../utils/strings'
+import {SubmitRsvp} from '../actions/submitRSVP'
+import {toast} from 'sonner'
 
 
 const RSVPform = () => {
@@ -18,8 +20,36 @@ const RSVPform = () => {
     const [errors,setErrors] = useState<Record<string,string>>({});
     const [isLoading,setIsLoading] = useState(false);
 
-    const handleSubmit = () => {
-        console.log('...submit')
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if(!name) {
+            setErrors({name: 'Name is required'})
+            return
+        }
+        if(!email) {
+            setErrors({email: 'Email is required'})
+            return
+        }
+        const formData = new FormData()
+        formData.append("name",name)
+        formData.append("email",email)
+        formData.append("accompany",accompany || "0")
+        formData.append("attendance",attendance)
+        console.log(formData,'form data')
+
+        setIsLoading(true)
+        const response = await SubmitRsvp(formData)
+        if(response.success) {
+            toast.success(strings.thankYouMessage)
+            setName('')
+            setEmail('')
+            setAccompany("0")
+            setAttendance('yes')
+            setErrors({})
+        } else {
+            toast.error(response.message)
+        }
+        setIsLoading(false)
     }
     const openGoogleMaps = () => {
         window.open(`https://www.google.com/maps/search/?api=1&querry=${strings.eventLocation}`)
